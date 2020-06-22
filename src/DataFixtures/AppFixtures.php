@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
                     ->setEmail($faker->email);
 
             $manager->persist($customer);
-            
+
 
             for($i = 0; $i< mt_rand(3, 10); $i++){
                 $invoice = new Invoice();
@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
                         ->setStatus($faker->randomElement(['SENT', 'PAID', 'CANCELLED']))
                         ->setCustomer($customer);
 
-            $manager->persist($customer);
+            $manager->persist($invoice);
 
             }
         }
