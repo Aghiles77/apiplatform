@@ -12,6 +12,24 @@ const CustomersPage = props => {
         .catch(error => console.log(error.response));   
     }, []);
 
+
+    const handleDelete = id => {
+        const originalCustomers = [...customers];
+
+        //L'approche optimiste
+        setCustomers(customers.filter(customer => customer.id !== id));
+
+        //L'approche pessimiste
+        axios
+        .delete("http://localhost:8000/api/customers/" + id)
+        .then(response =>console.log("ok"))
+        .catch(error => {
+            setCustomers(originalCustomers);
+            console.log(error.response);
+        });
+    };
+
+
     return (
         <>
             <h1>Liste des clients</h1>
@@ -42,7 +60,14 @@ const CustomersPage = props => {
                         </td>
                         <td className="text-center">
                             {customer.totalAmount.toLocaleString()} €</td>
-                        <td><button className="btn btn-sm btn-danger">Supprimer</button></td>
+                        <td>
+                            <button 
+                            onClick={() => handleDelete(customer.id)}
+                            disabled={customer.invoices.length > 0} 
+                            className="btn btn-sm btn-danger">
+                                Supprimer
+                            </button>
+                        </td>
                             
                         
                     </tr>)}
