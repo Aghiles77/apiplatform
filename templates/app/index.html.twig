@@ -2,11 +2,11 @@
 
 {% block title "Mon application React" %}
 
-{% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-{% endblock %}
-
 {% block body %}
+    <link href="https://bootswatch.com/4/litera/bootstrap.min.css" rel="stylesheet">
+    
+    {{ encore_entry_link_tags('app') }}
+
     <div id="app"></div>
 {% endblock %}
 
